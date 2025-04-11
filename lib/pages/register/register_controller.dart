@@ -19,7 +19,7 @@ class RegisterController {
       );
 
       final data = jsonDecode(res.body);
-      print(data);
+      print(data["message"]);
     } catch (err) {
       print("Error while register -$err");
     }
