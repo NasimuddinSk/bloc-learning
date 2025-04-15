@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/counterAppUsingBloc/pages/counter_example/counter.dart';
+import 'package:todo_app/counterAppUsingBloc/pages/multi_bloc_example/multi_bloc_example.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -24,7 +25,7 @@ class Home extends StatelessWidget {
           ElevatedButton(
             onPressed: () {
               MaterialPageRoute page = MaterialPageRoute(
-                builder: (_) => Counter(),
+                builder: (_) => MultiBlocExample(),
               );
               Navigator.of(context).push(page);
             },
