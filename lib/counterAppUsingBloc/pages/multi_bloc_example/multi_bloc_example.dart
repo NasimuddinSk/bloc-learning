@@ -26,7 +26,6 @@ class MultiBlocExample extends StatelessWidget {
                 BlocBuilder<SwitchBloc, SwitchState>(
                   // buildWhen: (previous, current) => previous != current,
                   builder: (context, state) {
-                    print("Slider Build");
                     return Switch(
                       value: state.isEnable,
                       onChanged: (value) {
@@ -49,7 +48,7 @@ class MultiBlocExample extends StatelessWidget {
                 height: 200,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(state.sliderValue * 100),
-                  color: Colors.pink.withValues(alpha: state.sliderValue),
+                  color: Colors.pink.withValues(alpha: 1),
                 ),
                 child: Center(
                   child: Text(
