@@ -1,6 +1,7 @@
-part of 'favourite_app_bloc.dart';
+import 'package:equatable/equatable.dart';
+import 'package:todo_app/counterAppUsingBloc/bloc/model/favourite_items_model.dart';
 
-sealed class FavouriteAppEvent extends Equatable {
+abstract class FavouriteAppEvent extends Equatable {
   const FavouriteAppEvent();
 
   @override
@@ -8,3 +9,16 @@ sealed class FavouriteAppEvent extends Equatable {
 }
 
 class FeatchFavouriteList extends FavouriteAppEvent {}
+
+class FavouriteItem extends FavouriteAppEvent {
+  final FavouriteItemsModel item;
+  const FavouriteItem({required this.item});
+}
+
+class CompleteItem extends FavouriteAppEvent {
+  final FavouriteItemsModel item;
+
+  const CompleteItem({required this.item});
+}
+
+class DeleteItem extends FavouriteAppEvent {}

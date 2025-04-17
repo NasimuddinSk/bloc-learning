@@ -1,10 +1,27 @@
-part of 'favourite_app_bloc.dart';
+import 'package:equatable/equatable.dart';
+import 'package:todo_app/counterAppUsingBloc/bloc/model/favourite_items_model.dart';
 
-sealed class FavouriteAppState extends Equatable {
-  const FavouriteAppState();
-  
+enum ListStatus { loading, success, failure }
+
+class FavouriteAppInitial extends Equatable {
+  final List<FavouriteItemsModel> favouriteItemsList;
+  final ListStatus listStatus;
+
+  const FavouriteAppInitial({
+    this.favouriteItemsList = const [],
+    this.listStatus = ListStatus.loading,
+  });
+
+  FavouriteAppInitial copyWith({
+    List<FavouriteItemsModel>? favouriteItemsList,
+    ListStatus? listStatus,
+  }) {
+    return FavouriteAppInitial(
+      favouriteItemsList: favouriteItemsList ?? this.favouriteItemsList,
+      listStatus: listStatus ?? this.listStatus,
+    );
+  }
+
   @override
-  List<Object> get props => [];
+  List<Object> get props => [favouriteItemsList, listStatus];
 }
-
-final class FavouriteAppInitial extends FavouriteAppState {}
