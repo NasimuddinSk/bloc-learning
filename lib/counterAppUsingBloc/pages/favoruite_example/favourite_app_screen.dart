@@ -39,6 +39,7 @@ class _FavouriteAppScreenState extends State<FavouriteAppScreen> {
                     icon: Icon(Icons.delete),
                     color: Colors.red,
                   ),
+                  SizedBox(),
                   SizedBox(width: 20),
                 ],
               );

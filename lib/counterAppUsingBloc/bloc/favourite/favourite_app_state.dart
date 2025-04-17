@@ -5,19 +5,24 @@ enum ListStatus { loading, success, failure }
 
 class FavouriteAppInitial extends Equatable {
   final List<FavouriteItemsModel> favouriteItemsList;
+  final List<FavouriteItemsModel> tempFavouriteItemsList;
   final ListStatus listStatus;
 
   const FavouriteAppInitial({
     this.favouriteItemsList = const [],
+    this.tempFavouriteItemsList = const [],
     this.listStatus = ListStatus.loading,
   });
 
   FavouriteAppInitial copyWith({
     List<FavouriteItemsModel>? favouriteItemsList,
+    List<FavouriteItemsModel>? tempFavouriteItemsList,
     ListStatus? listStatus,
   }) {
     return FavouriteAppInitial(
       favouriteItemsList: favouriteItemsList ?? this.favouriteItemsList,
+      tempFavouriteItemsList:
+          tempFavouriteItemsList ?? this.tempFavouriteItemsList,
       listStatus: listStatus ?? this.listStatus,
     );
   }

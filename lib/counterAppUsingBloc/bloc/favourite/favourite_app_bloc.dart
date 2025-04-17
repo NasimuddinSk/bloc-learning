@@ -43,14 +43,28 @@ class FavouriteAppBloc extends Bloc<FavouriteAppEvent, FavouriteAppInitial> {
     final index = favouriteItemsList.indexWhere(
       (item) => item.id == event.item.id,
     );
-    tempFavouriteItemsList.add(event.item);
 
     favouriteItemsList[index] = event.item;
-
-    emit(state.copyWith(favouriteItemsList: List.from(favouriteItemsList)));
+    emit(
+      state.copyWith(
+        favouriteItemsList: List.from(favouriteItemsList),
+        tempFavouriteItemsList: tempFavouriteItemsList,
+      ),
+    );
   }
 
   void _deleteItem(DeleteItem event, Emitter<FavouriteAppInitial> emit) {
+    tempFavouriteItemsList.clear();
+    for (int i = 0; i < favouriteItemsList.length; i++) {
+      if (!favouriteItemsList[i].isDeleting) {
+        // favouriteItemsList.removeAt(i);
+        tempFavouriteItemsList.add(favouriteItemsList[i]);
+      }
+    }
+    favouriteItemsList.clear();
+    favouriteItemsList = List.from(tempFavouriteItemsList);
+    tempFavouriteItemsList.clear();
+
     emit(state.copyWith(favouriteItemsList: List.from(favouriteItemsList)));
   }
 }
