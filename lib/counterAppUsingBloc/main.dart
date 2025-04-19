@@ -5,21 +5,31 @@ import 'package:todo_app/counterAppUsingBloc/bloc/favourite/favourite_app_bloc.d
 import 'package:todo_app/counterAppUsingBloc/bloc/repository/favourite_repository.dart';
 import 'package:todo_app/counterAppUsingBloc/bloc/slider/slider_bloc.dart';
 import 'package:todo_app/counterAppUsingBloc/bloc/switch/switch_bloc.dart';
+import 'package:todo_app/counterAppUsingBloc/pages/bloc_provider/page/bloc/user_bloc.dart';
+import 'package:todo_app/counterAppUsingBloc/pages/bloc_provider/page/provider/user_provider.dart';
+import 'package:todo_app/counterAppUsingBloc/pages/bloc_provider/page/repository/user_repository.dart';
 import 'package:todo_app/counterAppUsingBloc/pages/home.dart';
 
 void main() {
   runApp(
-    MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (BuildContext context) => CounterBloc()),
-        BlocProvider(create: (BuildContext context) => SwitchBloc()),
-        BlocProvider(create: (BuildContext context) => SliderBloc()),
-        BlocProvider(
-          create:
-              (BuildContext context) => FavouriteAppBloc(FavouriteRepository()),
-        ),
-      ],
-      child: CounterApp(),
+    RepositoryProvider(
+      create: (context) {
+        return UserRepository(userProvider: UserProvider());
+      },
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (context) => CounterBloc()),
+          BlocProvider(create: (context) => SwitchBloc()),
+          BlocProvider(create: (context) => SliderBloc()),
+          BlocProvider(
+            create: (context) => FavouriteAppBloc(FavouriteRepository()),
+          ),
+          BlocProvider(
+            create: (context) => UserBloc(context.read<UserRepository>()),
+          ),
+        ],
+        child: CounterApp(),
+      ),
     ),
   );
 }
